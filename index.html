@@ -54,7 +54,7 @@
   }
   .card{
     width:100%;max-width:460px;background:var(--card);border-radius:var(--radius);
-    box-shadow:var(--shadow);padding:34px 26px 26px;position:relative;overflow:hidden;
+    box-shadow:var(--shadow);padding:46px 26px 38px;position:relative;overflow:hidden;
   }
   .grip{width:54px;height:5px;border-radius:99px;background:#D9D9E3;margin:0 auto 22px}
 
@@ -118,7 +118,7 @@
   .vid:nth-child(3){background:linear-gradient(180deg,#AEC0A0,#5F7757)}
   .vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
   .vid .veil{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.05) 40%,rgba(0,0,0,.62))}
-  .vid .play{position:absolute;top:46%;left:50%;transform:translate(-50%,-50%);z-index:2;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+  .vid .play{position:absolute;top:39%;left:50%;transform:translate(-50%,-50%);z-index:2;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 14px rgba(0,0,0,.25)}
   .vid .play svg{margin-left:2px}
   .vid .cap{position:absolute;left:9px;right:9px;bottom:9px;z-index:2}
   .vid .cap b{display:block;font-size:13px;font-weight:800;line-height:1.2}
@@ -234,21 +234,21 @@
     <!-- ВІДГУКИ: відео клади в /videos як video1.mp4, video2.mp4, video3.mp4 -->
     <div class="videos">
       <button class="vid" type="button" data-src="videos/video1.mp4">
-        <video src="videos/video1.mp4" muted playsinline preload="metadata"></video>
+        <video src="videos/video1.mp4#t=0.1" muted playsinline preload="metadata"></video>
         <div class="veil"></div>
         <div class="play"><svg width="14" height="16" viewBox="0 0 14 16"><path fill="#1C1C2E" d="M0 0l14 8-14 8z"/></svg></div>
         <div class="cap"><b>Альона, 45</b><span>Кулінарія</span></div>
       </button>
 
       <button class="vid" type="button" data-src="videos/video2.mp4">
-        <video src="videos/video2.mp4" muted playsinline preload="metadata"></video>
+        <video src="videos/video2.mp4#t=0.1" muted playsinline preload="metadata"></video>
         <div class="veil"></div>
         <div class="play"><svg width="14" height="16" viewBox="0 0 14 16"><path fill="#1C1C2E" d="M0 0l14 8-14 8z"/></svg></div>
         <div class="cap"><b>Тетяна, 54</b><span>Лайф-коуч</span></div>
       </button>
 
       <button class="vid" type="button" data-src="videos/video3.mp4">
-        <video src="videos/video3.mp4" muted playsinline preload="metadata"></video>
+        <video src="videos/video3.mp4#t=0.1" muted playsinline preload="metadata"></video>
         <div class="veil"></div>
         <div class="play"><svg width="14" height="16" viewBox="0 0 14 16"><path fill="#1C1C2E" d="M0 0l14 8-14 8z"/></svg></div>
         <div class="cap"><b>Оксана, 50</b><span>Вчитель мови</span></div>
@@ -348,7 +348,8 @@
       <h2>Готово! Заявку прийнято ✨</h2>
       <p>Дякую, <b id="tyName">друже</b>! Я звʼяжуся з вами найближчим часом, щоб домовитись про зручний час безкоштовної консультації.</p>
       <p style="margin-top:12px">🎁 А ще надішлю вам у подарунок <b>30 ідей відео</b>, які можуть привести перших клієнтів.</p>
-      <p style="margin-top:12px;font-size:14.5px;color:#9A9AAE">Можете закривати цю сторінку.</p>
+      <a class="btn" id="tyTgBtn" href="#" target="_blank" rel="noopener" style="margin-top:18px">✈️ Написати мені в Telegram</a>
+      <p style="margin-top:12px;font-size:14.5px;color:#9A9AAE">Хочеш домовитись швидше? Напиши особисто 👆</p>
     </div>
   </section>
 
@@ -363,22 +364,25 @@
 /* =========================================================
    ⚙️ НАЛАШТУВАННЯ — заміни посилання на свій Telegram-канал
    ========================================================= */
-const TG_CHANNEL = 'https://t.me/YOUR_CHANNEL';   // ⬅ встав сюди посилання на свій канал
+const TG_CHANNEL  = 'https://t.me/vmendaliuk';   // гілка «не готовий вкладати» (постав КАНАЛ, якщо він окремий)
+const TG_PERSONAL = 'https://t.me/vmendaliuk';   // кнопка на екрані подяки — твій особистий акаунт
 document.getElementById('tgBtn').href = TG_CHANNEL;
+document.getElementById('tyTgBtn').href = TG_PERSONAL;
 
 /* =========================================================
    НАВІГАЦІЯ КВІЗА (з історією для кнопки «Назад»)
    ========================================================= */
 const screens = [...document.querySelectorAll('.screen')];
+const validNames = screens.map(s => s.dataset.screen);   // intro, q1, q2, q3, form, tg, thankyou
 const answers = {};
 let current = 'intro';
-let history = [];
 
 const progress = document.getElementById('progress');
 const progFill = document.getElementById('progFill');
 const progLabel = document.getElementById('progLabel');
 
 function render(name){
+  if(!validNames.includes(name)) name = 'intro';
   screens.forEach(s => s.classList.toggle('active', s.dataset.screen === name));
   current = name;
   window.scrollTo({top:0,behavior:'smooth'});
@@ -391,11 +395,20 @@ function render(name){
     progress.classList.remove('on');
   }
 }
-function go(name){ history.push(current); render(name); }
-function back(){ const p = history.pop(); if(p) render(p); }
+
+// Кожен крок = окрема «підсторінка» зі своїм URL (#q1, #q2 …).
+// Завдяки цьому працює системна кнопка «Назад» на телефоні.
+function go(name){
+  if((location.hash || '#intro').slice(1) === name) render(name);
+  else location.hash = name;
+}
+window.addEventListener('hashchange', ()=> render((location.hash || '#intro').slice(1)));
 
 document.getElementById('startBtn').addEventListener('click', ()=>go('q1'));
-document.getElementById('backBtn').addEventListener('click', back);
+document.getElementById('backBtn').addEventListener('click', ()=> history.back());
+
+// Стартовий екран за поточним hash (або інтро)
+render((location.hash || '#intro').slice(1));
 
 /* Вибір відповіді */
 document.querySelectorAll('.options').forEach(group=>{
