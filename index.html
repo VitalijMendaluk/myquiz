@@ -183,7 +183,7 @@
   }
 
   /* Низькі екрани (старі/невеликі телефони) — щоб усе влізло без скролу */
-  @media(max-height:780px){
+  @media(max-height:679px){
     body{padding:10px}
     .card{padding:18px 16px}
     .grip{margin:0 auto 12px}
@@ -209,9 +209,9 @@
 
   /* МОБІЛЬНИЙ: квіз на ВЕСЬ екран телефону (під діагональ), без сірої рамки */
   @media (max-width:560px){
-    body{padding:0;align-items:stretch;background:#fff}
+    body{padding:0;align-items:stretch;background:#fff;min-height:100dvh;min-height:var(--app-h,100dvh)}
     .card{
-      max-width:none;min-height:100vh;min-height:100dvh;border-radius:0;box-shadow:none;
+      max-width:none;min-height:100vh;min-height:100dvh;min-height:var(--app-h,100dvh);border-radius:0;box-shadow:none;
       display:flex;flex-direction:column;
       padding:calc(env(safe-area-inset-top) + 16px) 22px calc(env(safe-area-inset-bottom) + 16px);
     }
@@ -221,7 +221,7 @@
   }
 
   /* Звичайні/високі телефони: більший контент, щоб компактно заповнити екран */
-  @media (max-width:560px) and (min-height:781px){
+  @media (max-width:560px) and (min-height:680px){
     h1.intro-h1{font-size:31px;line-height:1.16;margin-bottom:22px}
     .bullets{gap:11px;max-width:360px;margin-bottom:10px}
     .bullets li{font-size:17.5px;padding-left:32px}
@@ -400,6 +400,13 @@ const TG_CHANNEL  = 'https://t.me/vmendaliuk';   // гілка «не готов
 const TG_PERSONAL = 'https://t.me/vmendaliuk';   // кнопка на екрані подяки — твій особистий акаунт
 document.getElementById('tgBtn').href = TG_CHANNEL;
 document.getElementById('tyTgBtn').href = TG_PERSONAL;
+
+/* Точна висота видимого екрана для ВСІХ браузерів (Chrome mobile, Instagram/Facebook in-app тощо),
+   бо dvh/vh у вбудованих браузерах рахуються неправильно і дають великі прольоти */
+function setAppHeight(){ document.documentElement.style.setProperty('--app-h', window.innerHeight + 'px'); }
+setAppHeight();
+window.addEventListener('resize', setAppHeight);
+window.addEventListener('orientationchange', ()=> setTimeout(setAppHeight, 250));
 
 /* =========================================================
    НАВІГАЦІЯ КВІЗА (з історією для кнопки «Назад»)
