@@ -86,7 +86,8 @@
   .bullets li{position:relative;padding-left:28px;font-size:15.5px;font-weight:600;line-height:1.3;color:#33334d}
   .bullets li::before{content:"✔";position:absolute;left:2px;top:0;color:var(--violet);font-weight:900}
   .bonus{display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#5b4b86,#7C5CFC);color:#fff;border-radius:16px;padding:12px 15px;margin-bottom:14px}
-  .bonus-ic{font-size:30px;flex-shrink:0;line-height:1}
+  .bonus-ic{font-size:30px;flex-shrink:0;line-height:1;transform-origin:center bottom;animation:giftWobble 1.1s ease-in-out infinite}
+  @keyframes giftWobble{0%,100%{transform:rotate(-10deg)}50%{transform:rotate(10deg)}}
   .bonus-tx{font-size:14px;font-weight:700;line-height:1.25}
   .bonus-tag{display:block;font-size:10.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;opacity:.9;margin-top:3px}
   /* Легка пульсація цифри 30 */
@@ -107,7 +108,7 @@
   .vid::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:3;pointer-events:none;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.22)}
 
   @media (prefers-reduced-motion:reduce){
-    .beam::after,.bonus-num{animation:none}
+    .beam::after,.bonus-num,.bonus-ic{animation:none}
   }
 
   /* ВІДГУКИ */
@@ -215,15 +216,26 @@
       padding:calc(env(safe-area-inset-top) + 16px) 22px calc(env(safe-area-inset-bottom) + 16px);
     }
     .grip{display:none}
-    /* активний крок займає весь вільний простір і центрується по вертикалі */
+    /* активний крок займає весь вільний простір і центрується по вертикалі (компактний блок) */
     .screen.active{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
-    /* інтро — розподіляємо по всій висоті екрана (заповнюємо діагональ) */
-    [data-screen="intro"].active{justify-content:space-between}
-    [data-screen="intro"].active .bullets,
-    [data-screen="intro"].active .videos,
-    [data-screen="intro"].active .bonus,
-    [data-screen="intro"].active h1.intro-h1,
-    [data-screen="intro"].active .divider{margin-top:0;margin-bottom:0}
+  }
+
+  /* Звичайні/високі телефони: більший контент, щоб компактно заповнити екран */
+  @media (max-width:560px) and (min-height:781px){
+    h1.intro-h1{font-size:31px;line-height:1.16;margin-bottom:22px}
+    .bullets{gap:11px;max-width:360px;margin-bottom:10px}
+    .bullets li{font-size:17.5px;padding-left:32px}
+    .bullets li::before{font-size:18px}
+    .divider{font-size:11.5px;letter-spacing:.05em;margin:8px 0 20px;white-space:nowrap}
+    .vid{aspect-ratio:1/1.46}
+    .vid .cap b{font-size:14.5px}
+    .vid .cap span{font-size:12.5px}
+    .videos{gap:12px;margin-bottom:20px}
+    .bonus{padding:15px 16px;margin-bottom:20px}
+    .bonus-tx{font-size:15px}
+    .bonus-ic{font-size:34px}
+    .btn{font-size:20px;padding:21px}
+    .foot{font-size:15px;margin-top:18px}
   }
 </style>
 </head>
@@ -281,7 +293,7 @@
     </div>
 
     <button class="btn beam" id="startBtn" type="button">Отримати мій план →</button>
-    <p class="foot">⏱ Займе <b>1 хвилину</b> · це безкоштовно</p>
+    <p class="foot">⏱ Займе <b>30 секунд</b> · це безкоштовно</p>
   </section>
 
   <!-- ========== ПИТАННЯ 1 ========== -->
