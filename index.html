@@ -205,6 +205,26 @@
     .field{margin-bottom:11px}
     .field input[type=text],.field input[type=tel],.dial{padding-top:13px;padding-bottom:13px}
   }
+
+  /* МОБІЛЬНИЙ: квіз на ВЕСЬ екран телефону (під діагональ), без сірої рамки */
+  @media (max-width:560px){
+    body{padding:0;align-items:stretch;background:#fff}
+    .card{
+      max-width:none;min-height:100vh;min-height:100dvh;border-radius:0;box-shadow:none;
+      display:flex;flex-direction:column;
+      padding:calc(env(safe-area-inset-top) + 16px) 22px calc(env(safe-area-inset-bottom) + 16px);
+    }
+    .grip{display:none}
+    /* активний крок займає весь вільний простір і центрується по вертикалі */
+    .screen.active{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;overflow-y:auto}
+    /* інтро — розподіляємо по всій висоті екрана (заповнюємо діагональ) */
+    [data-screen="intro"].active{justify-content:space-between}
+    [data-screen="intro"].active .bullets,
+    [data-screen="intro"].active .videos,
+    [data-screen="intro"].active .bonus,
+    [data-screen="intro"].active h1.intro-h1,
+    [data-screen="intro"].active .divider{margin-top:0;margin-bottom:0}
+  }
 </style>
 </head>
 <body>
@@ -540,11 +560,14 @@ const modal = document.getElementById('modal');
 const modalVideo = document.getElementById('modalVideo');
 document.querySelectorAll('.vid').forEach(v=>{
   v.addEventListener('click', ()=>{
-    modalVideo.src = v.dataset.src;
+    modalVideo.src = v.dataset.src.split('#')[0];   // завжди відтворюємо з початку
     modal.classList.add('on');
+    modalVideo.currentTime = 0;
     modalVideo.play().catch(()=>{});
   });
 });
+// Підстраховка: щойно завантажились метадані — ставимо на 0 секунду
+modalVideo.addEventListener('loadedmetadata', ()=>{ try{ modalVideo.currentTime = 0; }catch(e){} });
 function closeModal(){
   modal.classList.remove('on'); modalVideo.pause();
   modalVideo.removeAttribute('src'); modalVideo.load();
