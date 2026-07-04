@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>Знаходь клієнтів через TikTok за кордоном — безкоштовна консультація</title>
-<meta name="description" content="Пройди тест за 1 хвилину — і отримай план, як знаходити клієнтів через TikTok, живучи за кордоном." />
+<meta name="description" content="Пройди тест за 30 секунд — і отримай план, як знаходити клієнтів через TikTok, живучи за кордоном." />
 
 <meta property="og:title" content="Знаходь клієнтів через TikTok за кордоном" />
 <meta property="og:description" content="Пройди тест — і отримай план під себе." />
@@ -169,6 +169,9 @@
   .center h2{font-size:26px;font-weight:800;margin-bottom:12px;line-height:1.2}
   .center p{color:var(--gray);font-size:16.5px;margin-bottom:8px}
 
+  /* ЦИТАТА-МЕТЧ: показує релевантний відгук залежно від відповіді на Q2 */
+  .match-quote{display:none;background:var(--violet-soft);color:var(--ink);border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600;line-height:1.35;margin-bottom:18px;text-align:center}
+
   /* МОДАЛКА */
   .modal{position:fixed;inset:0;background:rgba(10,8,24,.92);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
   .modal.on{display:flex}
@@ -254,7 +257,8 @@
   <!-- ========== ЕКРАН 0: ІНТРО ========== -->
   <section class="screen active" data-screen="intro">
     <div class="grip"></div>
-    <h1 class="intro-h1">Як отримати <span class="hl">перших клієнтів з&nbsp;TikTok</span> у&nbsp;2026 за&nbsp;30&nbsp;днів 🔥</h1>
+    <div class="eyebrow">Живеш за кордоном?</div>
+    <h1 class="intro-h1">Як за&nbsp;30&nbsp;днів отримати <span class="hl">перших клієнтів з&nbsp;TikTok</span>, живучи за&nbsp;кордоном 🔥</h1>
     <ul class="bullets">
       <li>навіть якщо боїшся камери</li>
       <li>навіть якщо починаєш з нуля</li>
@@ -266,33 +270,33 @@
     <!-- ВІДГУКИ: відео клади в /videos як video1.mp4, video2.mp4, video3.mp4 -->
     <div class="videos">
       <button class="vid" type="button" data-src="videos/video1.mp4">
-        <video src="videos/video1.mp4#t=0.1" muted playsinline preload="metadata"></video>
+        <video src="videos/video1.mp4#t=0.1" muted playsinline preload="metadata" autoplay loop></video>
         <div class="veil"></div>
         <div class="play"><svg width="14" height="16" viewBox="0 0 14 16"><path fill="#1C1C2E" d="M0 0l14 8-14 8z"/></svg></div>
-        <div class="cap"><b>Альона, 45</b><span>Кулінар</span></div>
+        <div class="cap"><b>Альона, 45</b><span>Кулінарія</span></div>
       </button>
 
       <button class="vid" type="button" data-src="videos/video2.mp4">
-        <video src="videos/video2.mp4#t=0.1" muted playsinline preload="metadata"></video>
+        <video src="videos/video2.mp4#t=0.1" muted playsinline preload="metadata" autoplay loop></video>
         <div class="veil"></div>
         <div class="play"><svg width="14" height="16" viewBox="0 0 14 16"><path fill="#1C1C2E" d="M0 0l14 8-14 8z"/></svg></div>
         <div class="cap"><b>Тетяна, 54</b><span>Лайф-коуч</span></div>
       </button>
 
       <button class="vid" type="button" data-src="videos/video3.mp4">
-        <video src="videos/video3.mp4#t=0.1" muted playsinline preload="metadata"></video>
+        <video src="videos/video3.mp4#t=0.1" muted playsinline preload="metadata" autoplay loop></video>
         <div class="veil"></div>
         <div class="play"><svg width="14" height="16" viewBox="0 0 14 16"><path fill="#1C1C2E" d="M0 0l14 8-14 8z"/></svg></div>
-        <div class="cap"><b>Анна, 28</b><span>Психолог</span></div>
+        <div class="cap"><b>Оксана, 50</b><span>Вчитель мови</span></div>
       </button>
     </div>
 
     <div class="bonus">
       <div class="bonus-ic">🎁</div>
-      <div class="bonus-tx"><span class="bonus-num">30</span> ідей відео, які можуть привести клієнтів в&nbsp;подарунок</div>
+      <div class="bonus-tx"><span class="bonus-num">30</span> ідей відео в&nbsp;подарунок — вони можуть привести перших клієнтів</div>
     </div>
 
-    <button class="btn beam" id="startBtn" type="button">Отримати мій план →</button>
+    <button class="btn beam" id="startBtn" type="button">Отримати свій план →</button>
     <p class="foot">⏱ Займе <b>30 секунд</b> · це безкоштовно</p>
   </section>
 
@@ -301,7 +305,7 @@
     <div class="q-title">На якому етапі ти зараз в TikTok?</div>
     <div class="q-hint">Обери варіант, що найбільше підходить</div>
     <div class="options" data-q="q1">
-      <button class="opt" data-val="Не розумію, з чого почати"><span class="ic">🙄</span> Не розумію, з чого почати і як залучати клієнтів</button>
+      <button class="opt" data-val="Не розумію, з чого почати"><span class="ic">🤔</span> Не розумію, з чого почати і як залучати клієнтів</button>
       <button class="opt" data-val="Є профіль, але нема заявок"><span class="ic">📄</span> Є профіль, але нема заявок</button>
       <button class="opt" data-val="Є перегляди, але клієнтів 0"><span class="ic">👀</span> Є перегляди, але клієнтів 0</button>
     </div>
@@ -322,12 +326,12 @@
 
   <!-- ========== ПИТАННЯ 3 (з розгалуженням) ========== -->
   <section class="screen" data-screen="q3">
-    <div class="q-title">Як ти ставишся до інвестицій у свій розвиток?</div>
+    <div class="q-title">Щоб отримати перших клієнтів швидше — чи готова/ий ти інвестувати в&nbsp;себе?</div>
     <div class="q-hint">Останнє питання 🙌</div>
     <div class="options" data-q="q3">
-      <button class="opt" data-route="form" data-val="Готова інвестувати, якщо бачу результат"><span class="ic">🚀</span> Готова/ий інвестувати, якщо бачу результат</button>
-      <button class="opt" data-route="form" data-val="Розгляну, якщо є розстрочка"><span class="ic">💳</span> Розгляну, якщо є зручні умови (розстрочка)</button>
-      <button class="opt" data-route="tg" data-val="Поки не готова вкладати"><span class="ic">🤔</span> Поки не готова/ій вкладати</button>
+      <button class="opt" data-route="form" data-val="Готова інвестувати, якщо бачу результат"><span class="ic">🚀</span> Так, готова/ий інвестувати, якщо бачу чіткий результат</button>
+      <button class="opt" data-route="form" data-val="Готова, якщо є розстрочка"><span class="ic">💳</span> Готова/ий, якщо будуть зручні умови (розстрочка)</button>
+      <button class="opt" data-route="tg" data-val="Цікавить лише безкоштовне"><span class="ic">🆓</span> Ні, цікавить лише безкоштовне</button>
     </div>
   </section>
 
@@ -335,6 +339,7 @@
   <section class="screen" data-screen="form">
     <div class="q-title">Покроковий план, як отримати перших клієнтів з&nbsp;TikTok за 30 днів 🔥</div>
     <div class="q-hint">Допоміг 130+ людям отримати клієнтів з TikTok. Беру тільки 5 людей на тиждень.</div>
+    <div class="match-quote" id="matchQuote"></div>
 
     <form id="leadForm" novalidate>
       <div class="field">
@@ -352,11 +357,11 @@
 
       <label class="agree">
         <input type="checkbox" id="agree" checked />
-        <span>Я погоджуюсь з <a href="#" target="_blank">політикою конфіденційності</a> та правилами використання</span>
+        <span>Я погоджуюсь з <a href="privacy.html" target="_blank">політикою конфіденційності</a> та правилами використання</span>
       </label>
       <div class="err-msg" id="agreeErr" style="margin-top:2px">Потрібна згода, щоб надіслати заявку</div>
 
-      <button class="btn" type="submit" id="submitBtn" style="margin-top:18px">Отримати свій план 🚀</button>
+      <button class="btn" type="submit" id="submitBtn" style="margin-top:18px">Отримати свій план →</button>
       <p class="privacy">Я особисто звʼяжуся з вами, щоб домовитись про безкоштовну консультацію. Без спаму.</p>
     </form>
   </section>
@@ -366,9 +371,9 @@
     <div class="center">
       <div class="mark">🎁</div>
       <h2>Тримай корисний бонус!</h2>
-      <p>Поки ти придивляєшся — забирай <b>30 ідей відео</b>, які можуть привести тобі клієнтів, та щоденні фішки у моєму Telegram-каналі.</p>
-      <p>Там я показую, як учні знаходять клієнтів через TikTok 👇</p>
-      <a class="btn" id="tgBtn" href="#" target="_blank" rel="noopener" style="margin-top:20px">Приєднатися до каналу →</a>
+      <p>Забирай <b>30 ідей відео</b>, які можуть привести тобі перших клієнтів — безкоштовно.</p>
+      <p>Напиши мені в Telegram — і я одразу надішлю 👇</p>
+      <a class="btn" id="tgBtn" href="#" target="_blank" rel="noopener" style="margin-top:20px">Написати мені в Telegram →</a>
       <p class="privacy" style="margin-top:14px">Безкоштовно · можна вийти будь-коли</p>
     </div>
   </section>
@@ -398,8 +403,14 @@
    ========================================================= */
 const TG_CHANNEL  = 'https://t.me/vmendaliuk';   // гілка «не готовий вкладати» (постав КАНАЛ, якщо він окремий)
 const TG_PERSONAL = 'https://t.me/vmendaliuk';   // кнопка на екрані подяки — твій особистий акаунт
-document.getElementById('tgBtn').href = TG_CHANNEL;
-document.getElementById('tyTgBtn').href = TG_PERSONAL;
+
+// Прев'ю-текст, який одразу з'являється в полі вводу Telegram при відкритті чату
+// (працює тільки для посилань на ОСОБИСТИЙ акаунт, не на канал — якщо TG_CHANNEL стане
+// реальним каналом (t.me/назва_каналу), видали ?text= з рядка нижче для tgBtn).
+const TG_TEXT_BONUS = 'Привіт! Хочу забрати 30 ідей відео 🎁';
+const TG_TEXT_PERSONAL = 'Привіт! Щойно пройшла(ов) квіз на сайті, хочу домовитись про консультацію 🚀';
+document.getElementById('tgBtn').href = TG_CHANNEL + '?text=' + encodeURIComponent(TG_TEXT_BONUS);
+document.getElementById('tyTgBtn').href = TG_PERSONAL + '?text=' + encodeURIComponent(TG_TEXT_PERSONAL);
 
 /* Точна висота видимого екрана для ВСІХ браузерів (Chrome mobile, Instagram/Facebook in-app тощо),
    бо dvh/vh у вбудованих браузерах рахуються неправильно і дають великі прольоти */
@@ -449,6 +460,23 @@ document.getElementById('backBtn').addEventListener('click', ()=> history.back()
 // Стартовий екран за поточним hash (або інтро)
 render((location.hash || '#intro').slice(1));
 
+/* Підбір релевантної цитати під ціль, обрану в Q2 (показується на екрані форми).
+   Для ніш з реальними відео-відгуками — конкретне імʼя. Для ніш без відео (MLM,
+   Інше) — тайлорована, але не вигадана "з іменем", фраза, щоб не видавати
+   вигаданого свідчення за реальний кейс конкретної людини. */
+const Q2_MATCH = {
+  'Клієнтів на послуги':          '✨ Тетяна, 54 (Лайф-коуч) вже отримала перших клієнтів з TikTok — так само, як хочеш ти',
+  'Продажі товарів':              '✨ Альона, 45 (Кулінарія) вже продає через TikTok — так само можеш і ти',
+  'Мережевий бізнес / Бади':      '✨ Ольга, 47 (мережевий бізнес) вже отримує клієнтів і залучає людей у команду через TikTok — так само, як хочеш ти',
+  'Просування особистого бренду': '✨ Оксана, 50 (Вчитель мови) вже прокачала особистий бренд через TikTok — так само, як хочеш ти',
+  'Інше':                         '✨ 130+ учнів вже отримують результати з TikTok'
+};
+function updateMatchQuote(){
+  const el = document.getElementById('matchQuote');
+  el.textContent = Q2_MATCH[answers.q2] || '✨ 130+ учнів вже отримують результати з TikTok';
+  el.style.display = 'block';
+}
+
 /* Вибір відповіді */
 document.querySelectorAll('.options').forEach(group=>{
   group.querySelectorAll('.opt').forEach(opt=>{
@@ -459,6 +487,7 @@ document.querySelectorAll('.options').forEach(group=>{
 
       if(group.dataset.q === 'q3'){
         const route = opt.dataset.route; // 'form' | 'tg'
+        if(route !== 'tg') updateMatchQuote();
         setTimeout(()=> go(route === 'tg' ? 'tg' : 'form'), 260);
       } else {
         const nextScreen = group.dataset.q === 'q1' ? 'q2' : 'q3';
@@ -469,6 +498,8 @@ document.querySelectorAll('.options').forEach(group=>{
 });
 
 document.getElementById('tgBtn').addEventListener('click', ()=>{
+  // Це НЕ лід — людина сказала, що поки не готова інвестувати.
+  // Тільки трекінг кліку в Telegram, без відправки заявки в /api/lead.
   if(typeof fbq === 'function') fbq('trackCustom', 'TelegramClick');
 });
 
